@@ -82,30 +82,43 @@ class HLImagePositionButton: UIButton {
             return
         }
         
+        let labelSize = titleLabel.intrinsicContentSize
+        let imageSize = imageView.intrinsicContentSize
+        
         switch type {
         case .left:
             if isSetTitle() && isSetImage() {
-                titleLabel.frame.origin.x = imageView.frame.maxX + space
+//                titleLabel.frame.origin.x = imageView.frame.maxX + space
+                titleLabel.frame.origin.x = frame.width/2 - (labelSize.width + imageSize.width + space)/2
+                imageView.frame.origin.x = titleLabel.frame.maxX + space
+                
             }
         case .right:
             if isSetTitle() && isSetImage() {
-                titleLabel.frame.origin.x = contentEdgeInsets.left
-                imageView.frame.origin.x = titleLabel.frame.maxX + space
+//                titleLabel.frame.origin.x = contentEdgeInsets.left
+//                imageView.frame.origin.x = titleLabel.frame.maxX + space
+                
+                imageView.frame.origin.x = frame.width/2 - (labelSize.width + imageSize.width + space)/2
+                titleLabel.frame.origin.x = imageView.frame.maxX + space
             }
         case .top:
             if isSetTitle() && isSetImage() {
-                imageView.frame.origin.y = contentEdgeInsets.top
+//                imageView.frame.origin.y = contentEdgeInsets.top
+                imageView.frame.origin.y = frame.height/2 - (labelSize.height + imageSize.height + space)/2
+                
                 imageView.center.x = frame.width/2
                 titleLabel.frame.size = titleLabel.intrinsicContentSize
-                titleLabel.frame.origin.y = imageView.frame.maxY + getRealSpace()
+                titleLabel.frame.origin.y = imageView.frame.maxY + space
                 titleLabel.center.x = frame.width/2
             }
         case .bottom:
             if isSetTitle() && isSetImage() {
                 titleLabel.frame.size = titleLabel.intrinsicContentSize
-                titleLabel.frame.origin.y = contentEdgeInsets.top
+//                titleLabel.frame.origin.y = contentEdgeInsets.top
+                titleLabel.frame.origin.y = frame.height/2 - (labelSize.height + imageSize.height + space)/2
+                
                 titleLabel.center.x = frame.width/2
-                imageView.frame.origin.y = titleLabel.frame.maxY + getRealSpace()
+                imageView.frame.origin.y = titleLabel.frame.maxY + space
                 imageView.center.x = frame.width/2
             }
         }
